@@ -68,10 +68,32 @@ def verify_fb_token(token_sent):
 
 def get_message():
     # chooses a random message to send to the user
+    compliments = ["You look super cute today! I mean, y-you look super cute every day, but that's embarrassing...",
+                   "I love it when you have your hair like that. Just makes me want to fluff it!",
+                   "You're so kind and generous to your friends. You're my role model!"]
     positive_reminders = ["Remember you are loved, that your friends care for you even if you don't see it",
                           "Your friends want to be with you as much as you long to be with them",
                           "You are a one-of-a-kind person, and people love you for who you are :)"]
-    return random.choice(positive_reminders)
+    chibird = ["https://78.media.tumblr.com/df8ac8e3607139e76f10d01bf35b7103/tumblr_p8v14fdkMo1qc4uvwo1_500.png",
+               "https://78.media.tumblr.com/4aeab456ea9ea1e90062080320c892f9/tumblr_p8aljuoBJU1qc4uvwo1_500.png",
+               "https://78.media.tumblr.com/4aeab456ea9ea1e90062080320c892f9/tumblr_p8aljuoBJU1qc4uvwo1_500.png",
+               "https://78.media.tumblr.com/310eaa8079557c7441bd0ad27f2df98f/tumblr_p7oe6bF5Sw1qc4uvwo1_500.gif",
+               "https://78.media.tumblr.com/6576e0fd2392d8d805eee5ecb5ab0fae/tumblr_p7iy1aNd9o1qc4uvwo2_500.png",
+               "https://78.media.tumblr.com/fdc0b83117d6d721c6000ce04d53e0eb/tumblr_p7bdad9ub11qc4uvwo2_500.png",
+               "https://78.media.tumblr.com/5dad2503c5a6b344f2176adde12e923a/tumblr_p7bdad9ub11qc4uvwo1_500.png",
+               "https://78.media.tumblr.com/bd6db304c5618ac4a6b3ce9bf463de0e/tumblr_p78jz3hO6K1qc4uvwo1_500.png",
+               "https://78.media.tumblr.com/7e03ffe95b67876b6fea9b938f970a47/tumblr_p740rjPlGz1qc4uvwo1_500.png"]
+    mental_health = ["Taking care of your body is important - and your brain is part of that! Please don't feel bad for taking a break when you need it. <3",
+                     "You are not just your mental health; you are a multi-faceted, like a crystal growing out of the earth. <3",
+                     "Self care is not selfish! You are more special and important than all the little pains in life."]
+
+    grace_thoughts = ["Grace is waiting for a message from you! Go! It's not pestering if they love hearing from you.",
+                      "Grace misses you very much. <3",
+                      "You are a wonderful person, and Grace thinks you deserve every bit of love she can give you."]
+
+    available_options = [positive_reminders, compliments, chibird, mental_health, grace_thoughts]
+    result = random.choice(available_options)
+    return random.choice(result)
 
 def send_message(recipient_id, response):
     # sends user a text-based message provided via input response parameter
