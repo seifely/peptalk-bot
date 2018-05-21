@@ -21,10 +21,10 @@ import os
 # checks the bot's verify token
 
 app = Flask(__name__)
-# ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
-# VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
-ACCESS_TOKEN = "EAAYj3FZACfhYBAKjeszfIJhqzv9bdl7V9isYWOhzSEnUiCzZAZBDtBhrCB9MXlFAH641AmhGJeFOo20ABDCfSF0msd8WF1DRl7ChEGS4FLX3RMd3gRphZAoFc2GfSvB0ZBhwzJYjS0MIwcYcPyc0rIQZCtVBS5T6hlVyE0n3D5nk6beAtGqZAmG"
-VERIFY_TOKEN = "bibliography1994"
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
+# ACCESS_TOKEN = ""
+# VERIFY_TOKEN = ""
 bot = Bot(ACCESS_TOKEN)
 
 
