@@ -1,6 +1,7 @@
 from flask import Flask, request
 import random
 from pymessenger.bot import Bot
+import os
 # using flask, we can create an endpoint - a fancy way of referring to to a website URL - such as "/r/science"
 # to begin, we'll create a basic Flask app called app.py (see Flask intro post for learning abt the framework
 
@@ -20,8 +21,8 @@ from pymessenger.bot import Bot
 # checks the bot's verify token
 
 app = Flask(__name__)
-ACCESS_TOKEN = 'EAAYj3FZACfhYBAF2kJzYcvmqaIcmxfCpdJZAZBnQ0bdMoZAAlLHoFOhmyPBLl8vMNkBEoXf5TjkxxdMhTPhZCoddcbDQIxKlQzl0MwFbdzq2UcFAcHGfk1CANWRgycEyoLO6LWXWywH0135YCM2EZBlhyenvAx6iu4rn4z17CH4ICrJdnNVHKR'
-VERIFY_TOKEN = 'bibliography1994'
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot(ACCESS_TOKEN)
 
 
