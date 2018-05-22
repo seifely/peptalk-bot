@@ -3,22 +3,21 @@ import random
 from pymessenger.bot import Bot
 import os
 # using flask, we can create an endpoint - a fancy way of referring to to a website URL - such as "/r/science"
-# to begin, we'll create a basic Flask app called app.py (see Flask intro post for learning abt the framework)
 
 app = Flask(__name__)
-ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
-VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN']  # replacing the actual access token if we use Heroku to host
+VERIFY_TOKEN = os.environ['VERIFY_TOKEN']  # see above
 bot = Bot(ACCESS_TOKEN)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])  # main app location, including app methods
 def receive_message():
     """Before allowing people to message your bot, Facebook has implemented a verify token
     that confirms all requests that your bot receives came from Facebook."""
     if request.method == 'GET':
         # before allowing people to message bot, need to check FB verify token that confirms all requests that
         # bot receives comes from FB
-        token_sent = request.args.get("hub.verify_token") # last part = a token we make up and give to FB for verific.
+        token_sent = request.args.get("hub.verify_token")  # last part = a token we make up and give to FB for verific.
         return verify_fb_token(token_sent)
 
     # if the bot is not receiving a GET, likely receiving a POST req. where FB is sending bot a message sent by user
@@ -29,10 +28,10 @@ def receive_message():
             messaging = event['messaging']
             for message in messaging:
                 if message.get('message'):
-                    # FB Messanger ID for user so we know where to send responses back to
+                    # FB Messenger ID for user so we know where to send responses back to
                     recipient_id = message['sender']['id']
-                    if message['message'].get('text'):
-                        response_sent_text = get_message()
+                    if message['message'].get('text'):  # is this based on extracting input type as a string?
+                        response_sent_text = get_message()  # get the (for now) randomised message choice
                         send_message(recipient_id, response_sent_text)
                     if message['message'].get('attachments'): # if user sends a non-text item like a GIF or video
                         response_sent_nontext = get_message()
@@ -45,10 +44,9 @@ def receive_message():
 
 def verify_fb_token(token_sent):
     # take token sent by FB and verify it matches the verify token you sent
-    # if they match, allow request, else return error
-    if token_sent == VERIFY_TOKEN:
-        return request.args.get("hub.challenge")
-    return 'Invalid verification token'
+    if token_sent == VERIFY_TOKEN:  # if the token sent by facebook is the one specified 'here'
+        return request.args.get("hub.challenge")  # get the request arguments
+    return 'Invalid verification token'  # else, throw up an error
 
 
 def get_message():
@@ -69,15 +67,15 @@ def get_message():
                       "Grace misses you very much. :( <3",
                       "You are a wonderful person, and Grace thinks you deserve every bit of love she can give you. <3"]
 
-    available_options = [positive_reminders, compliments, mental_health, grace_thoughts]
-    result = random.choice(available_options)
+    available_options = [positive_reminders, compliments, mental_health, grace_thoughts]  # random category choice
+    result = random.choice(available_options)  # random choice from that category
     return random.choice(result)
 
 
 def send_message(recipient_id, response):
-    bot.send_text_message(recipient_id, response) # sends user a txt-based message provided via input response parameter
+    bot.send_text_message(recipient_id, response)  # sends user a txt-based message given via input response parameter
     return "success"
 
 if __name__ == '__main__':
-    app.run() # run the app
+    app.run()  # run the app
 
